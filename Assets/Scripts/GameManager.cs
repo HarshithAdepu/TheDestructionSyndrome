@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static InputManager inputManagerInstance;
+    private void Awake()
+    {
+        inputManagerInstance = new InputManager();
+        inputManagerInstance.Enable();
+    }
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
