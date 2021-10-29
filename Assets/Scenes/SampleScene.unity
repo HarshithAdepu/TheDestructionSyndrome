@@ -680,6 +680,7 @@ GameObject:
   - component: {fileID: 1522708113}
   - component: {fileID: 1522708114}
   - component: {fileID: 1522708115}
+  - component: {fileID: 1522708118}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -760,27 +761,27 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f959cc91-2f40-4354-8a10-a3f4e43d2566
-    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2053650564}
-        m_TargetAssemblyTypeName: ShootBullet, Assembly-CSharp
-        m_MethodName: Shoot
+      - m_Target: {fileID: 1522708112}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_ActionId: f959cc91-2f40-4354-8a10-a3f4e43d2566
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
     m_ActionId: 75315663-bdc8-427d-a0db-5846a7e4079a
     m_ActionName: Player/Shoot[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard and Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -850,6 +851,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1522708118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522708112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4b6df2258c92d469923c638eed0589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 10
+  mainCam: {fileID: 0}
 --- !u!1 &1603405430
 GameObject:
   m_ObjectHideFlags: 0
