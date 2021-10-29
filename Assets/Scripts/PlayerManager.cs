@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float controllerDeadZone;
     private void Awake()
     {
-        inputManager = GameManager.inputManagerInstance;
+        inputManager = GameManager.instance.inputManagerInstance;
         objectPooler = ObjectPooler.objectPoolerInstance;
         mainCam = Camera.main;
         rb = GetComponent<Rigidbody2D>();
@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        GameManager.inputManagerInstance.Enable();  
+        GameManager.instance.inputManagerInstance.Enable();  
     } 
 
     void Update()

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static InputManager inputManagerInstance;
+    public static GameManager instance;
+    public InputManager inputManagerInstance;
     private void Awake()
     {
+        instance = this;
         inputManagerInstance = new InputManager();
         inputManagerInstance.Enable();
     }
