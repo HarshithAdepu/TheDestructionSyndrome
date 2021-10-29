@@ -16,6 +16,7 @@ public class ShootBullet : MonoBehaviour
     }
     void Start()
     {
+        //Put shooting script in player manager
         objectPooler = ObjectPooler.objectPoolerInstance; 
     }
 

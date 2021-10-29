@@ -16,14 +16,15 @@ public class PlayerManager : MonoBehaviour
     private PlayerInput playerInput;
     private void Awake()
     {
+        inputManager = new InputManager();
         inputManager.Enable();
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
+        inputManager.Player.Movement.performed += PlayerMovement;
     }
     private void OnEnable()
     {
-        inputManager.Enable();
-        inputManager.Player.Movement.performed += PlayerMovement;
+        inputManager.Enable();  
     } 
 
     void Update()
