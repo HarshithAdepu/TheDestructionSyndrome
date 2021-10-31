@@ -19,6 +19,11 @@ public class PlayerManager : MonoBehaviour
     InputManager inputManager;
     Vector2 lastLookDirection;
     [SerializeField] float controllerDeadZone;
+    enum InputDevices {KnM, Gamepad};
+    InputDevices currentInput;
+    float knmLastUpdatetime;
+    float gamepadLastUpdateTime;
+    PlayerInput playerInput;
     private void Awake()
     {
         inputManager = GameManager.instance.inputManagerInstance;
@@ -28,6 +33,7 @@ public class PlayerManager : MonoBehaviour
         inputManager.Player.Movement.performed += PlayerMovement;
         inputManager.Player.Shoot.performed += Shoot;
         gunBarrel = gameObject.transform.GetChild(0).GetComponent<Transform>();
+        currentInput = InputDevices.KnM;
     }
     private void OnEnable()
     {
@@ -36,14 +42,22 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        
         movememtVector = inputManager.Player.Movement.ReadValue<Vector2>();
         aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
-        //mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        //lookDirection = mousePosition - rb.position;
-        if (inputManager.Player.Aiming.ReadValue<Vector2>().magnitude < controllerDeadZone)
+
+        knmLastUpdatetime = ((float)Keyboard.current.lastUpdateTime);
+        gamepadLastUpdateTime = ((float)Gamepad.current.lastUpdateTime);
+
+        mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        lastLookDirection = (mousePosition - rb.position).normalized;
+        aimingVector = lastLookDirection;
+
+        /*if (inputManager.Player.Aiming.ReadValue<Vector2>().magnitude < controllerDeadZone)
             lastLookDirection = movememtVector.magnitude > aimingVector.magnitude ? movememtVector : aimingVector;
         else
-            lastLookDirection = aimingVector;
+            lastLookDirection = aimingVector;*/
+
         lookDirection = lastLookDirection;
         mouseAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
     }
@@ -55,11 +69,10 @@ public class PlayerManager : MonoBehaviour
     private void PlayerMovement(InputAction.CallbackContext callBackContext)
     {
         movememtVector = callBackContext.ReadValue<Vector2>();
-        Debug.Log(movememtVector);
         rb.AddForce(movememtVector, ForceMode2D.Force);
     }
 
-    public void Shoot(InputAction.CallbackContext callBackContext)
+    void Shoot(InputAction.CallbackContext callBackContext)
     {
         AudioManager.audioManagerInstance.PlaySound("Gunshot");
         objectPooler.SpawnObject("BulletHit", gunBarrel.position, gunBarrel.rotation);
@@ -67,5 +80,10 @@ public class PlayerManager : MonoBehaviour
         bullet.GetComponent<BulletBehaviour>().bulletDamage = 10f;
         Rigidbody2D bulletRB = bullet.GetComponent<Rigidbody2D>();
         bulletRB.velocity = gunBarrel.up * bulletSpeed;
+    }
+
+    void SwitchInput(InputAction.CallbackContext callbackContext)
+    {
+        Debug.Log(callbackContext);
     }
 }
