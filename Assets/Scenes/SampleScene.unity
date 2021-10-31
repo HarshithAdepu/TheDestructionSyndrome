@@ -1124,9 +1124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b6df2258c92d469923c638eed0589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 7
-  bulletSpeed: 10
-  controllerDeadZone: 0.5
+  playerSpeed: 5
+  bulletSpeed: 20
+  controllerDeadZone: 0.4
 --- !u!1 &1603405430
 GameObject:
   m_ObjectHideFlags: 0
