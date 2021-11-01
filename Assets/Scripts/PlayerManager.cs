@@ -11,8 +11,9 @@ public class PlayerManager : MonoBehaviour
     Vector2 aimingVector;
     Camera mainCam;
     Vector2 mousePosition;
+    Vector2 mouseVector;
     Vector2 lookDirection;
-    float mouseAngle;
+    float lookAngle;
     Transform gunBarrel;
     ObjectPooler objectPooler;
     [SerializeField] float bulletSpeed;
@@ -42,29 +43,26 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        
         movememtVector = inputManager.Player.Movement.ReadValue<Vector2>();
         aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
-
-        knmLastUpdatetime = ((float)Keyboard.current.lastUpdateTime);
-        gamepadLastUpdateTime = ((float)Gamepad.current.lastUpdateTime);
-
         mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        lastLookDirection = (mousePosition - rb.position).normalized;
-        aimingVector = lastLookDirection;
-
-        /*if (inputManager.Player.Aiming.ReadValue<Vector2>().magnitude < controllerDeadZone)
-            lastLookDirection = movememtVector.magnitude > aimingVector.magnitude ? movememtVector : aimingVector;
-        else
-            lastLookDirection = aimingVector;*/
-
-        lookDirection = lastLookDirection;
-        mouseAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        mouseVector = (mousePosition - rb.position).normalized;
+        if(mouseVector != (mousePosition - rb.position).normalized)
+        {
+            mouseVector = (mousePosition - rb.position).normalized;
+            lookDirection = mouseVector;
+        }
+        if (aimingVector != inputManager.Player.Aiming.ReadValue<Vector2>())
+        {
+            aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
+            lookDirection = aimingVector;
+        }
+        lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
     }
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movememtVector.normalized * playerSpeed * Time.fixedDeltaTime);
-        rb.rotation = mouseAngle;
+        rb.rotation = lookAngle;
     }
     private void PlayerMovement(InputAction.CallbackContext callBackContext)
     {
