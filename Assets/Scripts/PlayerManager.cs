@@ -11,22 +11,18 @@ public class PlayerManager : MonoBehaviour
     Vector2 aimingVector;
     Camera mainCam;
     Vector2 mousePosition;
-    Vector2 mouseVector;
     Vector2 lookDirection;
     float lookAngle;
     Transform gunBarrel;
     ObjectPooler objectPooler;
     [SerializeField] float bulletSpeed;
     InputManager inputManager;
-    Vector2 lastLookDirection;
+    Vector2 lastLookDirection = Vector2.zero;
     [SerializeField] float controllerDeadZone;
-    enum InputDevices {KnM, Gamepad};
-    InputDevices currentInput;
-    float knmLastUpdatetime;
-    float gamepadLastUpdateTime;
     PlayerInput playerInput;
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         inputManager = GameManager.instance.inputManagerInstance;
         objectPooler = ObjectPooler.objectPoolerInstance;
         mainCam = Camera.main;
@@ -34,7 +30,6 @@ public class PlayerManager : MonoBehaviour
         inputManager.Player.Movement.performed += PlayerMovement;
         inputManager.Player.Shoot.performed += Shoot;
         gunBarrel = gameObject.transform.GetChild(0).GetComponent<Transform>();
-        currentInput = InputDevices.KnM;
     }
     private void OnEnable()
     {
@@ -44,9 +39,9 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         movememtVector = inputManager.Player.Movement.ReadValue<Vector2>();
-        aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
         mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mouseVector = (mousePosition - rb.position).normalized;
+
+        /*aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
         if(mouseVector != (mousePosition - rb.position).normalized)
         {
             mouseVector = (mousePosition - rb.position).normalized;
@@ -56,7 +51,18 @@ public class PlayerManager : MonoBehaviour
         {
             aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
             lookDirection = aimingVector;
+        }*/
+        if (playerInput.currentControlScheme == "Keyboard and Mouse")
+            aimingVector = (mousePosition - rb.position).normalized;
+        else if (playerInput.currentControlScheme == "Gamepad")
+        {
+            aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
+            if (aimingVector.magnitude > controllerDeadZone)
+                lastLookDirection = aimingVector;
+            else
+                aimingVector = lastLookDirection;
         }
+        lookDirection = aimingVector;
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
     }
     private void FixedUpdate()
