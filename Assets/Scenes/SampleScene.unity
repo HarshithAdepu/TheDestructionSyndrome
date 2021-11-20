@@ -214,11 +214,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155946594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.94060683, y: -0.3405941, z: -7.665396}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &155946596
 MonoBehaviour:
@@ -236,8 +236,8 @@ MonoBehaviour:
   - clipName: Gunshot
     clip: {fileID: 8300000, guid: cf6b134f57f93b64cae7175481af73a2, type: 3}
     loop: 0
-    volume: 0.5
-    pitch: 1.5
+    volume: 0.3
+    pitch: 1.2
     source: {fileID: 0}
   - clipName: 8BitBackground
     clip: {fileID: 8300000, guid: df6f65f0820859c47be26236b92dca2b, type: 3}
@@ -340,7 +340,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &709840726
 GameObject:
@@ -799,7 +799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1107246117
 GameObject:
@@ -919,6 +919,8 @@ GameObject:
   - component: {fileID: 1522708114}
   - component: {fileID: 1522708115}
   - component: {fileID: 1522708118}
+  - component: {fileID: 1522708119}
+  - component: {fileID: 1522708120}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1091,7 +1093,7 @@ Transform:
   m_Children:
   - {fileID: 2053650562}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1522708118
 MonoBehaviour:
@@ -1102,12 +1104,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 1522708112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4b6df2258c92d469923c638eed0589, type: 3}
+  m_Script: {fileID: 11500000, guid: 8290bdeb7d79e644d861e4ef08f1ab20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  bulletSpeed: 20
-  controllerDeadZone: 0.4
+--- !u!114 &1522708119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522708112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa356dc1a42db544812eccd3203753d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerDeadZone: 0.2
+--- !u!114 &1522708120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522708112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb80a9f90f1c32458d0c0a091e8f278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: 0
 --- !u!1 &1603405430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,7 +1381,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1786335657
 MonoBehaviour:
@@ -1449,7 +1475,7 @@ Transform:
   m_LocalScale: {x: 22.234793, y: 13.112587, z: 1.1695137}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1949788243
 GameObject:

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler objectPoolerInstance;
+
     [System.Serializable]
     public class PoolClass
     {
@@ -12,13 +13,16 @@ public class ObjectPooler : MonoBehaviour
         public GameObject prefab;
         public int maxCount;
     }
+
     public List<PoolClass> poolList;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
+
     private void Awake()
     {
         if(objectPoolerInstance == null)
             objectPoolerInstance = this;
     }
+
     void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
@@ -33,11 +37,6 @@ public class ObjectPooler : MonoBehaviour
             }
             poolDictionary.Add(pool.name, objectQueue);
         }
-    }
-
-    void Update()
-    {
-        
     }
 
     public GameObject SpawnObject(string name, Vector3 position, Quaternion rotation)

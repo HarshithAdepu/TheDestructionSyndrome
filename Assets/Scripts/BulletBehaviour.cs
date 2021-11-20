@@ -5,13 +5,26 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     public float bulletDamage;
-    [SerializeField] float bulletForce;
+    public float bulletSpeed;
+    [SerializeField] float bulletImpactForce;
+
+    private void OnEnable()
+    {
+        GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
+    }
+    private void OnDisable()
+    {
+        
+    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Hit " + collider.tag);
+
         ObjectPooler.objectPoolerInstance.SpawnObject("BulletHit", transform.position, transform.rotation);
+
         if (collider.GetComponent<Rigidbody2D>() != null)
-            collider.GetComponent<Rigidbody2D>().AddForce(gameObject.GetComponent<Rigidbody2D>().velocity * bulletForce * Time.deltaTime, ForceMode2D.Force);
+            collider.GetComponent<Rigidbody2D>().AddForce(gameObject.GetComponent<Rigidbody2D>().velocity * bulletImpactForce * Time.deltaTime, ForceMode2D.Force);
+
         gameObject.SetActive(false);
     }
 }
