@@ -12,13 +12,8 @@ public class GameManager : MonoBehaviour
         inputManagerInstance = new InputManager();
         inputManagerInstance.Enable();
     }
-    void Start()
+    public void PlayerHealthUpdated()
     {
-        
-    }
 
-    void Update()
-    {
-        
     }
 }
