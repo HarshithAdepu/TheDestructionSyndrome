@@ -28,6 +28,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "WeaponSwitching",
+                    "type": "Value",
+                    "id": "c095650f-5366-463f-95fb-b81fe924671d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -182,6 +190,17 @@
                     "processors": "",
                     "groups": "Gamepad;AndroidGamepad",
                     "action": "Aiming",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "efe19463-1e65-4f1d-bd37-7a7db69bed17",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "WeaponSwitching",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

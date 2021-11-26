@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/InputManager.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/InputManager.inputactions'
 
 using System;
 using System.Collections;
@@ -39,6 +39,14 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""803a9f7c-28f7-4fe6-af29-b775ca507e9f"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""WeaponSwitching"",
+                    ""type"": ""Value"",
+                    ""id"": ""c095650f-5366-463f-95fb-b81fe924671d"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -197,6 +205,17 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efe19463-1e65-4f1d-bd37-7a7db69bed17"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""WeaponSwitching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -247,6 +266,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Aiming = m_Player.FindAction("Aiming", throwIfNotFound: true);
+        m_Player_WeaponSwitching = m_Player.FindAction("WeaponSwitching", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -299,6 +319,7 @@ public class @InputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Aiming;
+    private readonly InputAction m_Player_WeaponSwitching;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -306,6 +327,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Aiming => m_Wrapper.m_Player_Aiming;
+        public InputAction @WeaponSwitching => m_Wrapper.m_Player_WeaponSwitching;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -324,6 +346,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @Aiming.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAiming;
                 @Aiming.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAiming;
                 @Aiming.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAiming;
+                @WeaponSwitching.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwitching;
+                @WeaponSwitching.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwitching;
+                @WeaponSwitching.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwitching;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -337,6 +362,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @Aiming.started += instance.OnAiming;
                 @Aiming.performed += instance.OnAiming;
                 @Aiming.canceled += instance.OnAiming;
+                @WeaponSwitching.started += instance.OnWeaponSwitching;
+                @WeaponSwitching.performed += instance.OnWeaponSwitching;
+                @WeaponSwitching.canceled += instance.OnWeaponSwitching;
             }
         }
     }
@@ -373,5 +401,6 @@ public class @InputManager : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnAiming(InputAction.CallbackContext context);
+        void OnWeaponSwitching(InputAction.CallbackContext context);
     }
 }
