@@ -28,9 +28,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Shoot"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""75315663-bdc8-427d-a0db-5846a7e4079a"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -168,7 +168,7 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": ""StickDeadzone(max=1)"",
-                    ""groups"": ""Gamepad;AndroidGamepad"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -201,7 +201,7 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad;AndroidGamepad"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -243,17 +243,6 @@ public class @InputManager : IInputActionCollection, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""AndroidGamepad"",
-            ""bindingGroup"": ""AndroidGamepad"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<AndroidGamepad>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -385,15 +374,6 @@ public class @InputManager : IInputActionCollection, IDisposable
         {
             if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
             return asset.controlSchemes[m_GamepadSchemeIndex];
-        }
-    }
-    private int m_AndroidGamepadSchemeIndex = -1;
-    public InputControlScheme AndroidGamepadScheme
-    {
-        get
-        {
-            if (m_AndroidGamepadSchemeIndex == -1) m_AndroidGamepadSchemeIndex = asset.FindControlSchemeIndex("AndroidGamepad");
-            return asset.controlSchemes[m_AndroidGamepadSchemeIndex];
         }
     }
     public interface IPlayerActions

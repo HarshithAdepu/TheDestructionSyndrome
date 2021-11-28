@@ -37,15 +37,15 @@ public class PlayerAim : MonoBehaviour
 
     void Update()
     {
-        if(playerInput.currentControlScheme == "Keyboard and Mouse")
+        if (playerInput.currentControlScheme == "Keyboard and Mouse")
         {
             mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
             lastLookDirection = (mousePosition - rb.position).normalized;
         }
-        else if(playerInput.currentControlScheme == "Gamepad")
+        else if (playerInput.currentControlScheme == "Gamepad")
         {
             aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
-
+            aimingVector = AssistedAim();
             if (aimingVector.magnitude > controllerDeadZone)
                 lastLookDirection = aimingVector;
         }
@@ -57,5 +57,10 @@ public class PlayerAim : MonoBehaviour
     private void FixedUpdate()
     {
         rb.rotation = lookAngle;
+    }
+
+    Vector2 AssistedAim()
+    {
+        return Vector2.zero;
     }
 }

@@ -8,6 +8,8 @@ public class SoundClass
 
     public AudioClip clip;
 
+    public GameObject targetObject;
+
     public bool loop;
 
     [Range(0f, 1f)]

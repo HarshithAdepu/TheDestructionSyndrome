@@ -18,9 +18,9 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        foreach(SoundClass s in sounds)
+        foreach (SoundClass s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
+            s.source = s.targetObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
@@ -36,10 +36,10 @@ public class AudioManager : MonoBehaviour
     {
         SoundClass s = Array.Find(sounds, sound => sound.clipName == clipName);
 
-        if(s==null)
+        if (s == null)
         {
-            Debug.Log("Sound file \""+clipName+"\" not found");
-            return; 
+            Debug.Log("Sound file \"" + clipName + "\" not found");
+            return;
         }
 
         s.source.Play();

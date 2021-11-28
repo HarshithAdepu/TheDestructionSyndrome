@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   weaponName: Shotgun
+  speed: 25
   damage: 20
-  spread: 0.5
+  spread: 0.2
   impactforce: 20
-  coolDown: 1
-  timeBetweenShots: 0.5
+  coolDown: 0.5
+  timeBetweenShots: 0
   ammo: 50
+  bulletsPerShot: 3
+  ammoLeft: 0
   allowFireHold: 0
+  fireSFX: {fileID: 0}

@@ -7,7 +7,8 @@ using UnityEngine;
 public class Weapon : ScriptableObject
 {
     public string weaponName;
-    public float damage, spread, impactforce, coolDown, timeBetweenShots;
-    public int ammo;
+    public float speed, damage, spread, impactforce, coolDown, timeBetweenShots;
+    public int ammo, bulletsPerShot, ammoLeft;
     public bool allowFireHold;
+    public AudioClip fireSFX;
 }

@@ -15,9 +15,9 @@
                 },
                 {
                     "name": "Shoot",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "75315663-bdc8-427d-a0db-5846a7e4079a",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
@@ -155,7 +155,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "StickDeadzone(max=1)",
-                    "groups": "Gamepad;AndroidGamepad",
+                    "groups": "Gamepad",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -188,7 +188,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad;AndroidGamepad",
+                    "groups": "Gamepad",
                     "action": "Aiming",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -230,17 +230,6 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "AndroidGamepad",
-            "bindingGroup": "AndroidGamepad",
-            "devices": [
-                {
-                    "devicePath": "<AndroidGamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

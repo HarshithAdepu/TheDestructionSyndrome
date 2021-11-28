@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: AR
   m_EditorClassIdentifier: 
   weaponName: AR
-  damage: 15
-  spread: 0.5
-  impactforce: 10
+  speed: 30
+  damage: 25
+  spread: 0.08
+  impactforce: 5
   coolDown: 0.1
-  timeBetweenShots: 0.1
+  timeBetweenShots: 0
   ammo: 200
+  bulletsPerShot: 1
   allowFireHold: 1
+  fireSFX: {fileID: 0}
