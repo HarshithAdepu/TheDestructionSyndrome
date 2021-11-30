@@ -17,9 +17,10 @@ MonoBehaviour:
   damage: 10
   spread: 0.05
   impactforce: 10
-  coolDown: 0.1
+  coolDown: 0.5
   timeBetweenShots: 0
   ammo: -1
   bulletsPerShot: 1
+  ammoLeft: -1
   allowFireHold: 0
   fireSFX: {fileID: 0}

@@ -45,7 +45,7 @@ public class PlayerAim : MonoBehaviour
         else if (playerInput.currentControlScheme == "Gamepad")
         {
             aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
-            aimingVector = AssistedAim();
+            //aimingVector = AssistedAim();
             if (aimingVector.magnitude > controllerDeadZone)
                 lastLookDirection = aimingVector;
         }

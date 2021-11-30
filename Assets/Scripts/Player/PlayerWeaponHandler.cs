@@ -12,6 +12,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     bool allowFireHold, shooting, readyToShoot, buttonHeldDown;
     float lastFired;
     [SerializeField] Text ammoCount;
+    [SerializeField] Text weaponText;
     [SerializeField] Transform shootPoint;
     [SerializeField] Weapon currentWeapon;
     [SerializeField] List<Weapon> weapons;
@@ -41,6 +42,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         inputManager.Player.WeaponSwitching.performed += ctx => WeaponSwitch(ctx);
         readyToShoot = true;
 
+        weaponText.text = currentWeapon.name;
         if (currentWeapon.ammoLeft >= 0)
             ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;
         else ammoCount.text = "Ammo: ∞";
@@ -100,6 +102,8 @@ public class PlayerWeaponHandler : MonoBehaviour
         if (currentWeapon.ammoLeft >= 0)
             ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;
         else ammoCount.text = "Ammo: ∞";
+
+        weaponText.text = currentWeapon.name;
     }
 
     public void Shoot()
