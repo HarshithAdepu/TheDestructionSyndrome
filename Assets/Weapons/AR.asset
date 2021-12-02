@@ -16,10 +16,13 @@ MonoBehaviour:
   speed: 30
   damage: 25
   spread: 0.08
-  impactforce: 5
+  impactforce: 10
   coolDown: 0.1
   timeBetweenShots: 0
+  camShakeIntensity: 1
+  camShakeDuration: 0.1
   ammo: 200
   bulletsPerShot: 1
+  ammoLeft: 200
   allowFireHold: 1
   fireSFX: {fileID: 0}

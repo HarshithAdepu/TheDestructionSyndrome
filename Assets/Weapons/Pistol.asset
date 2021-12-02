@@ -16,9 +16,11 @@ MonoBehaviour:
   speed: 25
   damage: 15
   spread: 0.05
-  impactforce: 10
+  impactforce: 20
   coolDown: 0.5
   timeBetweenShots: 0
+  camShakeIntensity: 1
+  camShakeDuration: 0.1
   ammo: -1
   bulletsPerShot: 1
   ammoLeft: -1

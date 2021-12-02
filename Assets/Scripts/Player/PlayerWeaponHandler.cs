@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerWeaponHandler : MonoBehaviour
 {
-    float speed, damage, spread, impactforce, coolDown, reloadTime, timeBetweenShots;
-    int ammo, weaponIndex, bulletsPerShot, ammoLeft;
+    float speed, damage, spread, impactforce, coolDown, reloadTime, timeBetweenShots, camShakeIntensity, camShakeDuration;
+    int ammo, weaponIndex, bulletsPerShot, ammoLeft, shotcount;
     bool allowFireHold, shooting, readyToShoot, buttonHeldDown;
     float lastFired;
     [SerializeField] Text ammoCount;
@@ -32,6 +32,8 @@ public class PlayerWeaponHandler : MonoBehaviour
         ammo = currentWeapon.ammo;
         allowFireHold = currentWeapon.allowFireHold;
         bulletsPerShot = currentWeapon.bulletsPerShot;
+        camShakeDuration = currentWeapon.camShakeDuration;
+        camShakeIntensity = currentWeapon.camShakeIntensity;
         foreach (Weapon w in weapons)
         {
             w.ammoLeft = w.ammo;
@@ -58,7 +60,9 @@ public class PlayerWeaponHandler : MonoBehaviour
             if (currentWeapon.bulletsPerShot > 1)
             {
                 for (int i = 0; i < currentWeapon.bulletsPerShot; i++)
-                    Shoot();
+                {
+                    Invoke("Shoot", currentWeapon.timeBetweenShots * i);
+                }
                 if (currentWeapon.ammoLeft > 0)
                     currentWeapon.ammoLeft--;
             }
@@ -98,6 +102,8 @@ public class PlayerWeaponHandler : MonoBehaviour
         ammoLeft = currentWeapon.ammoLeft;
         allowFireHold = currentWeapon.allowFireHold;
         bulletsPerShot = currentWeapon.bulletsPerShot;
+        camShakeDuration = currentWeapon.camShakeDuration;
+        camShakeIntensity = currentWeapon.camShakeIntensity;
 
         if (currentWeapon.ammoLeft >= 0)
             ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;
@@ -108,6 +114,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public void Shoot()
     {
+        CameraShake.cameraShakeInstance.ShakeCam(camShakeIntensity, camShakeDuration);
         lastFired = Time.time;
 
         if (currentWeapon.ammoLeft == 0)

@@ -36,6 +36,7 @@ public class BulletBehaviour : MonoBehaviour
             case "Enemy":
                 if (collider.GetComponent<Rigidbody2D>() != null)
                     collider.GetComponent<Rigidbody2D>().AddForce(gameObject.GetComponent<Rigidbody2D>().velocity * bulletImpactForce * Time.deltaTime, ForceMode2D.Force);
+                collider.GetComponent<EnemyHealthManager>().Damage(bulletDamage);
                 gameObject.SetActive(false);
                 break;
             case "Wall": gameObject.SetActive(false); break;

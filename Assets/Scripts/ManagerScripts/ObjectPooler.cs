@@ -19,17 +19,17 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        if(objectPoolerInstance == null)
+        if (objectPoolerInstance == null)
             objectPoolerInstance = this;
     }
 
     void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
-        foreach(PoolClass pool in poolList)
+        foreach (PoolClass pool in poolList)
         {
             Queue<GameObject> objectQueue = new Queue<GameObject>();
-            for(int i=0;i<pool.maxCount;i++)
+            for (int i = 0; i < pool.maxCount; i++)
             {
                 GameObject temp = Instantiate(pool.prefab);
                 temp.SetActive(false);
@@ -41,9 +41,9 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject SpawnObject(string name, Vector3 position, Quaternion rotation)
     {
-        if(!poolDictionary.ContainsKey(name))
+        if (!poolDictionary.ContainsKey(name))
         {
-            Debug.Log("Pool \""+name+"\" not found");
+            Debug.Log("Pool \"" + name + "\" not found");
             return null;
         }
         GameObject spawnedObject = poolDictionary[name].Dequeue();
