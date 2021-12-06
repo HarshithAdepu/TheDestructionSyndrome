@@ -39,8 +39,12 @@ public class PlayerAim : MonoBehaviour
     {
         if (playerInput.currentControlScheme == "Keyboard and Mouse")
         {
-            mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            //mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
             lastLookDirection = (mousePosition - rb.position).normalized;
+
+            mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            lookAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(lookAngle, Vector3.forward), 10000 * Time.deltaTime);
         }
         else if (playerInput.currentControlScheme == "Gamepad")
         {
@@ -51,7 +55,7 @@ public class PlayerAim : MonoBehaviour
         }
 
         lookDirection = lastLookDirection;
-        lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        //lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
     }
 
     private void FixedUpdate()

@@ -28,7 +28,7 @@ public class FieldOfView : MonoBehaviour
             {
                 float distancePlayer = Vector2.Distance(transform.position, player.position);
 
-                if(Physics2D.Raycast(transform.position, dirPlayer, distancePlayer, playerMask))
+                if(!Physics2D.Raycast(transform.position, dirPlayer, distancePlayer, obstacleMask))
                 {
                     visiblePlayer.Add(player);
                 }
