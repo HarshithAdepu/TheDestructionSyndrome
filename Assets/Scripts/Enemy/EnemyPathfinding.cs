@@ -11,6 +11,7 @@ public class EnemyPathfinding : MonoBehaviour
     int currentWayPoint;
     bool reachedDestination;
     float distanceToDestination;
+    Vector2 lookDirection;
     Seeker seeker;
     Rigidbody2D enemyRB;
     Vector2 directionMoving;
@@ -57,6 +58,8 @@ public class EnemyPathfinding : MonoBehaviour
         }
 
         directionMoving = ((Vector2)path.vectorPath[currentWayPoint] - enemyRB.position).normalized;
+        lookDirection = (Vector2)path.vectorPath[currentWayPoint] - enemyRB.position;
+        transform.GetChild(0).rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg));
         enemyRB.MovePosition(enemyRB.position + (directionMoving * enemySpeed * Time.fixedDeltaTime));
         distanceToDestination = Vector2.Distance(enemyRB.position, path.vectorPath[currentWayPoint]);
 
