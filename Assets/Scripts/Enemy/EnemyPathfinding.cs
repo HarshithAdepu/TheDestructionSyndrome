@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,15 +54,20 @@ public class EnemyPathfinding : MonoBehaviour
             Debug.Log("Reached Destination");
         }
         else
-        {
             reachedDestination = false;
-        }
 
-        directionMoving = ((Vector2)path.vectorPath[currentWayPoint] - enemyRB.position).normalized;
-        lookDirection = (Vector2)path.vectorPath[currentWayPoint] - enemyRB.position;
-        transform.GetChild(0).rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg));
-        enemyRB.MovePosition(enemyRB.position + (directionMoving * enemySpeed * Time.fixedDeltaTime));
-        distanceToDestination = Vector2.Distance(enemyRB.position, path.vectorPath[currentWayPoint]);
+        try
+        {
+            directionMoving = ((Vector2)path.vectorPath[currentWayPoint] - enemyRB.position).normalized;
+            lookDirection = (Vector2)path.vectorPath[currentWayPoint] - enemyRB.position;
+            transform.GetChild(0).rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg));
+            enemyRB.MovePosition(enemyRB.position + (directionMoving * enemySpeed * Time.fixedDeltaTime));
+            distanceToDestination = Vector2.Distance(enemyRB.position, path.vectorPath[currentWayPoint]);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
 
         if (distanceToDestination < destinationReachedDistance && !reachedDestination)
             currentWayPoint++;

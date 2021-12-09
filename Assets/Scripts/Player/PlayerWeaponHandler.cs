@@ -34,6 +34,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         bulletsPerShot = currentWeapon.bulletsPerShot;
         camShakeDuration = currentWeapon.camShakeDuration;
         camShakeIntensity = currentWeapon.camShakeIntensity;
+        gameObject.GetComponent<AudioSource>().clip = currentWeapon.fireSFX;
         foreach (Weapon w in weapons)
         {
             w.ammoLeft = w.ammo;
@@ -104,6 +105,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         bulletsPerShot = currentWeapon.bulletsPerShot;
         camShakeDuration = currentWeapon.camShakeDuration;
         camShakeIntensity = currentWeapon.camShakeIntensity;
+        gameObject.GetComponent<AudioSource>().clip = currentWeapon.fireSFX;
 
         if (currentWeapon.ammoLeft >= 0)
             ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;
