@@ -23,6 +23,7 @@ MonoBehaviour:
   camShakeDuration: 0.2
   ammo: 50
   bulletsPerShot: 3
-  ammoLeft: 41
+  ammoLeft: 47
   allowFireHold: 0
   fireSFX: {fileID: 8300000, guid: d4235fbc9d005f84c9f082058363e883, type: 3}
+  switchSFX: {fileID: 8300000, guid: e094de0c8fcb44c4f9ff3fa743895ca5, type: 3}

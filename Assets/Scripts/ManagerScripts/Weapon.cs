@@ -10,5 +10,5 @@ public class Weapon : ScriptableObject
     public float speed, damage, spread, impactforce, coolDown, timeBetweenShots, camShakeIntensity, camShakeDuration;
     public int ammo, bulletsPerShot, ammoLeft;
     public bool allowFireHold;
-    public AudioClip fireSFX;
+    public AudioClip fireSFX, switchSFX;
 }

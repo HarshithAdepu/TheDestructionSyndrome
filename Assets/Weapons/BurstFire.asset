@@ -26,3 +26,4 @@ MonoBehaviour:
   ammoLeft: 100
   allowFireHold: 0
   fireSFX: {fileID: 8300000, guid: e2a9e9e74070ed049b2cb78580ab27be, type: 3}
+  switchSFX: {fileID: 8300000, guid: 6cef47e955cd6d74e976c02d0c8228ff, type: 3}

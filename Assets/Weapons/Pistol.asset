@@ -25,4 +25,5 @@ MonoBehaviour:
   bulletsPerShot: 1
   ammoLeft: -1
   allowFireHold: 0
-  fireSFX: {fileID: 8300000, guid: db9696d5f1621354fa0dacb3a8d56e0c, type: 3}
+  fireSFX: {fileID: 8300000, guid: 39a3f501bc74b034fa7fe42058cbc8a6, type: 3}
+  switchSFX: {fileID: 8300000, guid: ba57d38c203e2fe499facfcc2cbcb425, type: 3}

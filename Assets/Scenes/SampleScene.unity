@@ -315,6 +315,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - clipName: 8BitBackground
+    clip: {fileID: 8300000, guid: df6f65f0820859c47be26236b92dca2b, type: 3}
+    targetObject: {fileID: 155946594}
+    loop: 1
+    volume: 0
+    pitch: 1
+    source: {fileID: 0}
   - clipName: Gunshot
     clip: {fileID: 8300000, guid: cf6b134f57f93b64cae7175481af73a2, type: 3}
     targetObject: {fileID: 1522708112}
@@ -322,11 +329,11 @@ MonoBehaviour:
     volume: 0.3
     pitch: 1.2
     source: {fileID: 0}
-  - clipName: 8BitBackground
-    clip: {fileID: 8300000, guid: df6f65f0820859c47be26236b92dca2b, type: 3}
-    targetObject: {fileID: 155946594}
-    loop: 1
-    volume: 0
+  - clipName: GunSwitch
+    clip: {fileID: 8300000, guid: ba57d38c203e2fe499facfcc2cbcb425, type: 3}
+    targetObject: {fileID: 1522708112}
+    loop: 0
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - clipName: ShootFail
@@ -670,7 +677,7 @@ GameObject:
   - component: {fileID: 340480864}
   - component: {fileID: 340480866}
   - component: {fileID: 340480865}
-  m_Layer: 6
+  m_Layer: 4
   m_Name: Window
   m_TagString: Window
   m_Icon: {fileID: 0}
@@ -1381,7 +1388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -357, y: 443}
+  m_AnchoredPosition: {x: -278.6, y: 443}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &539429722
@@ -1748,7 +1755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAMArIewJPunpewIAADcFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMtymzAU/RWP1rWHh+NHdy12nC6SeOJ2smEjxMVoDBIjidhOxv/eKwGGUm8szrmPc48ufBEudAXMSLVTPH2WKZDvE2LP5NukJ5/gQo9SHPgndDHvPDW5DaIu5o0aLhH3bZqWJRjF2Q9xLGywh2AteCZVuU2PEEltNMIZLTQgpaSx2QKhrwm54N90bVOueAqW9vSJp7U3ueGRgTCgBqH+LAwe5v7aD7dTb9GmdUnTYBYsw2W4WD5sp37oKtSCFbSsILXj9IWC9Wxtfyu/a900FDhwG2kZJouC61YtMdfKuRHRStc4KwaknOL0TiJKQyAHfsyNLThMf80yDaaVquh1wxXa2NQlP2XjbUn1qVH4QYvadlrMnaim5vN/9NR3dKZk+dS19T3bwuScnd7olVFtBt4P4c1AufPpTIsTTQp4z0G8yJ2StUiRNKq2qbWGYNM/3ieLcmCnHm+kjsC66o33xneGM9zc8Jeo4GViqdm8AQ6FdIa7/QCFV/MLBbvt0W0JRK2KPxp+0+NwzVrikSttkGqnFFZeImtlQ8nWeWanqU0klQAHt6IrELQw1z2WMeMbHHGDtiPmkdoXqm3ect17MkpxcB/veSNqL8/3y9K5PD+Dzl9rU3ABvWhLvKBPkRSiWbChJ13aoVYZZYO0Y83Tf1eLJGua+MEqhBXzFgmbT1dLn9Elo37oJ1669onbPS5wTlrsG6GtPXhroi8ucM+678xkp2jllj1V9Lzjn6UcWM5FJg9MAYjXpsJdOChsgq9luk05GnQAY7hw902+YlJIdoI0vheK3aTbi1E07qvEpOIf0lgkJpH7sMTEwvdd3iv44HC2zbtiN3L7C1BLAwQUAAAICADAKyHswbgnp20AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0UpJlYpKhkYVxqkWygVlSsomuhblhcqJ5cqKhsWGSQYqloVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICADAKyHsCT7p6XsCAAA3BQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICADAKyHswbgnp20AAAB4AAAACQAkAAAAAAAAAAAAAADIAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAIADAAAAAA==
+    dataString: UEsDBBQAAAgIAMArIexHsDHKegIAADcFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1zmzAQ/SsenWsPH0lsemux4/SQxBO3kwsXIRajMUiMJGI7Gf/3rgQYSn2xeG8/3j4tfBEudA3MSLVVPHuWGZDvM2LP5NtsIJ/gTA9S7Pkn9DHvPDOFDaIu5o0aLhH3bZqWFRjF2Q9xKG2wh2AjeC5VtckOEEttNMI5LTUgpaSx2QKhrxk54988sikXPAVLe/rEU+TNrnhkIAyoUai/CIP7Oz/yw83ce+jS+qR5sAiW4TJ8WN5v5n7oKjSClbSqIbPjDIWCaBHZ38rvW7cNBQ7cRVqGybLkulNLzKV2bsS01g3OigEZpzi9k4jSECiAHwpjC47TX/Ncg+mkKnpZc4U2tnXJT9l6W1F9bBV+0LKxnVatqLbm83/03Hd0rmT11Lf1PdvCFJwd3+iFUW1G3o/h9Ui58+lEyyNNS3gvQLzIrZKNyJA0qrGpjYZgPTzeJosLYMcBb6VOwKYejPemd4YzXN3w57jkVWqpxV0L7EvpDHf7AQqv5hcKdtujuxKIWhV/NPymh/GadcQjV9og1U0prLxUNsqGko3zzE7TmFgqAQ7uRNcgaGkuOyxjpjc44UZtJ8wjtS9U17zj+vdkkuLgId7zJtROnm6XpQt5egZdvDam5AIG0ZZ4QZ9iKUS7YGNP+rR9o3LKRmmHhmf/rhZJI5r6wSqEFfMeUnY3Xy19RpeM+qGfelnkE7d7XOCctNy1Qjt78NbEUFzgnvXfmdlW0dote6boacs/KzmynItc7pkCEK9thZtwUNgEX8tsk3E0aA/GcOHum3wlpJTsCFlyK5S4STdno2gyVElIzT+ksUhCYvdhSYiFb7u8U/DB4WSb98Wu5PoXUEsDBBQAAAgIAMArIezBuCenbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrRSkmVikqGRhXGqRbKBWVKyia6FuWFyonlyoqGxYZJBiqWhUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAMArIexHsDHKegIAADcFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAMArIezBuCenbQAAAHgAAAAJACQAAAAAAAAAAAAAAMcCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAfwMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -2360,8 +2367,8 @@ MonoBehaviour:
   - {fileID: 1781012051}
   spawnInterval: 1
   spawnCheckRadius: 0.5
-  enemyCap: 5
-  enemiesInWave: 20
+  enemyCap: 6
+  enemiesInWave: 0
   enemyStats: {fileID: 476625652}
 --- !u!4 &946119359
 Transform:
@@ -4369,7 +4376,7 @@ GameObject:
   - component: {fileID: 1744790447}
   - component: {fileID: 1744790446}
   - component: {fileID: 1744790445}
-  m_Layer: 6
+  m_Layer: 4
   m_Name: Window
   m_TagString: Window
   m_Icon: {fileID: 0}

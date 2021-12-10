@@ -105,13 +105,16 @@ public class PlayerWeaponHandler : MonoBehaviour
         bulletsPerShot = currentWeapon.bulletsPerShot;
         camShakeDuration = currentWeapon.camShakeDuration;
         camShakeIntensity = currentWeapon.camShakeIntensity;
-        gameObject.GetComponent<AudioSource>().clip = currentWeapon.fireSFX;
+        AudioSource[] audiosources = gameObject.GetComponents<AudioSource>();
+        audiosources[0].clip = currentWeapon.fireSFX;
+        audiosources[1].clip = currentWeapon.switchSFX;
 
         if (currentWeapon.ammoLeft >= 0)
             ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;
         else ammoCount.text = "Ammo: ∞";
 
         weaponText.text = currentWeapon.name;
+        AudioManager.audioManagerInstance.PlaySound("GunSwitch");
     }
 
     public void Shoot()
