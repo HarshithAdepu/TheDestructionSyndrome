@@ -17,6 +17,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     [SerializeField] Weapon currentWeapon;
     [SerializeField] List<Weapon> weapons;
     InputManager inputManager;
+    AudioSource fireSFX, switchSFX;
 
     void Awake()
     {
@@ -27,6 +28,9 @@ public class PlayerWeaponHandler : MonoBehaviour
 
         GameManager.instance.currentWeapon = currentWeapon;
 
+        fireSFX = AudioManager.audioManagerInstance.GetSource("Gunshot");
+        switchSFX = AudioManager.audioManagerInstance.GetSource("GunSwitch");
+
         coolDown = currentWeapon.coolDown;
         timeBetweenShots = currentWeapon.timeBetweenShots;
         ammo = currentWeapon.ammo;
@@ -34,11 +38,15 @@ public class PlayerWeaponHandler : MonoBehaviour
         bulletsPerShot = currentWeapon.bulletsPerShot;
         camShakeDuration = currentWeapon.camShakeDuration;
         camShakeIntensity = currentWeapon.camShakeIntensity;
-        gameObject.GetComponent<AudioSource>().clip = currentWeapon.fireSFX;
+
+        fireSFX.clip = currentWeapon.fireSFX;
+        switchSFX.clip = currentWeapon.switchSFX;
+
         foreach (Weapon w in weapons)
         {
             w.ammoLeft = w.ammo;
         }
+
         ammoLeft = currentWeapon.ammoLeft;
 
         inputManager = GameManager.instance.inputManagerInstance;
@@ -105,9 +113,9 @@ public class PlayerWeaponHandler : MonoBehaviour
         bulletsPerShot = currentWeapon.bulletsPerShot;
         camShakeDuration = currentWeapon.camShakeDuration;
         camShakeIntensity = currentWeapon.camShakeIntensity;
-        AudioSource[] audiosources = gameObject.GetComponents<AudioSource>();
-        audiosources[0].clip = currentWeapon.fireSFX;
-        audiosources[1].clip = currentWeapon.switchSFX;
+
+        fireSFX.clip = currentWeapon.fireSFX;
+        switchSFX.clip = currentWeapon.switchSFX;
 
         if (currentWeapon.ammoLeft >= 0)
             ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;

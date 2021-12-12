@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCoolDown: 2
-  attackDamage: 20
+  attackDamage: 50
 --- !u!1 &4148427399978837321
 GameObject:
   m_ObjectHideFlags: 0

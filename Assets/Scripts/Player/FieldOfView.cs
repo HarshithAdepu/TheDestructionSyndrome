@@ -20,15 +20,15 @@ public class FieldOfView : MonoBehaviour
 
         visiblePlayer.Clear();
 
-        for(int i =0; i<playerInRadius.Length; i++)
+        for (int i = 0; i < playerInRadius.Length; i++)
         {
             Transform player = playerInRadius[i].transform;
             Vector2 dirPlayer = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
-            if(Vector2.Angle(dirPlayer, transform.right)<viewAngle/2)
+            if (Vector2.Angle(dirPlayer, transform.right) < viewAngle / 2)
             {
                 float distancePlayer = Vector2.Distance(transform.position, player.position);
 
-                if(!Physics2D.Raycast(transform.position, dirPlayer, distancePlayer, obstacleMask))
+                if (!Physics2D.Raycast(transform.position, dirPlayer, distancePlayer, obstacleMask))
                 {
                     visiblePlayer.Add(player);
                 }
@@ -38,7 +38,7 @@ public class FieldOfView : MonoBehaviour
 
     public Vector2 DirFromAngle(float angleDeg, bool global)
     {
-        if(!global)
+        if (!global)
         {
             angleDeg += transform.eulerAngles.z;
         }

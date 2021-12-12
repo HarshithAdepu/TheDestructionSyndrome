@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerHealthManager : MonoBehaviour
 {
     readonly int DEFAULT_HEALTH = 100;
@@ -12,6 +12,8 @@ public class PlayerHealthManager : MonoBehaviour
     readonly int ARMOR_INCREASE_PER_UPGRADE = 25;
     [SerializeField] Image healthImage, armorImage;
     [SerializeField] int armorDamageReductionPercent;
+    [SerializeField] float invincibilityAfterAttacDuration;
+    bool isInvincible;
 
     int maxHealth;
     int currentHealth;
@@ -33,6 +35,10 @@ public class PlayerHealthManager : MonoBehaviour
 
     public void Damage(int damage)
     {
+        if (isInvincible)
+            return;
+        isInvincible = true;
+        Invoke("ResetInvincibility", invincibilityAfterAttacDuration);
         damage = damage * (100 - armorDamageReductionPercent) / 100;
         if (currentArmor > damage)
             currentArmor -= damage;
@@ -69,6 +75,7 @@ public class PlayerHealthManager : MonoBehaviour
     void PlayerDeath()
     {
         Debug.Log("Player Died!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void UpdateStats()
@@ -76,4 +83,10 @@ public class PlayerHealthManager : MonoBehaviour
         healthImage.fillAmount = (float)currentHealth / maxHealth;
         armorImage.fillAmount = (float)currentArmor / maxArmor;
     }
+
+    void ResetInvincibility()
+    {
+        isInvincible = false;
+    }
+
 }
