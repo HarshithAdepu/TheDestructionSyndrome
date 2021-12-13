@@ -88,5 +88,16 @@ public class PlayerHealthManager : MonoBehaviour
     {
         isInvincible = false;
     }
-
+    void UpgradeHealth()
+    {
+        maxHealth = maxHealth + HEALTH_INCREASE_PER_UPGRADE;
+        currentHealth = maxHealth;
+        UpdateStats();
+    }
+    void UpgradeArmor()
+    {
+        maxArmor = maxArmor + ARMOR_INCREASE_PER_UPGRADE;
+        currentArmor = maxArmor;
+        UpdateStats();
+    }
 }

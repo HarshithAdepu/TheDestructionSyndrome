@@ -38,7 +38,6 @@ public class EnemyHealthManager : MonoBehaviour
 
     void EnemyDeath()
     {
-        Debug.Log("Enemy Died!");
         EnemySpawner.enemySpawnerInstance.EnemyDied(this.gameObject);
         gameObject.SetActive(false);
     }
