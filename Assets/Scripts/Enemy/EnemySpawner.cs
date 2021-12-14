@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner enemySpawnerInstance;
-    [SerializeField] List<Transform> corners;
-    [SerializeField] float distanceFromPlayer;
+    [SerializeField] List<Transform> spawnPoints;
+    [SerializeField] float minDistanceFromPlayer;
+    [SerializeField] float maxDistanceFromPlayer;
     [SerializeField] int enemyCap;
     [SerializeField] Text waveNumber, enemiesInWaveText, enemiesLeft, kills, nextWaveTimerText;
     [SerializeField] Wave firstWave;
@@ -52,17 +53,17 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         locationFound = false;
-        Vector2 chosenLocation = Vector2.zero;
+        int chosenLocation = 0;
 
         while (!locationFound)
         {
-            chosenLocation = new Vector2(Random.Range(corners[0].position.x, corners[1].position.x), Random.Range(corners[0].position.y, corners[1].position.y));
+            chosenLocation = (Random.Range(0, spawnPoints.Count));
 
-            if (Vector3.Distance(chosenLocation, GameObject.Find("Player").transform.position) > distanceFromPlayer)
+            if (Vector3.Distance(spawnPoints[chosenLocation].position, GameObject.Find("Player").transform.position) > minDistanceFromPlayer && Vector3.Distance(spawnPoints[chosenLocation].position, GameObject.Find("Player").transform.position) < maxDistanceFromPlayer)
                 locationFound = true;
         }
 
-        enemiesOnScene.Add(ObjectPooler.objectPoolerInstance.SpawnObject("Enemy", chosenLocation, Quaternion.identity));
+        enemiesOnScene.Add(ObjectPooler.objectPoolerInstance.SpawnObject("Enemy", spawnPoints[chosenLocation].position, Quaternion.identity));
         locationFound = false;
     }
     public void EnemyDied(GameObject enemy)

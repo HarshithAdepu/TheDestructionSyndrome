@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class PlayerHealthManager : MonoBehaviour
 {
+    public static PlayerHealthManager playerHealthManagerInstance;
     readonly int DEFAULT_HEALTH = 100;
     readonly int HEALTH_INCREASE_PER_UPGRADE = 25;
     readonly int DEFAULT_ARMOR = 100;
@@ -15,10 +16,7 @@ public class PlayerHealthManager : MonoBehaviour
     [SerializeField] float invincibilityAfterAttacDuration;
     bool isInvincible;
 
-    int maxHealth;
-    int currentHealth;
-    int maxArmor;
-    int currentArmor;
+    int maxHealth, currentHealth, maxArmor, currentArmor;
 
 
     void Start()
@@ -58,12 +56,27 @@ public class PlayerHealthManager : MonoBehaviour
         UpdateStats();
     }
 
-    public void Heal(int health)
+    public bool Heal(int health)
     {
+        if (currentHealth == maxArmor)
+            return false;
+
         currentHealth = currentHealth + health;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
         UpdateStats();
+        return true;
+    }
+
+    public bool ArmorUp(int armor)
+    {
+        if (currentArmor == maxArmor)
+            return false;
+        currentArmor = currentArmor + armor;
+        if (currentArmor > maxArmor)
+            currentArmor = maxArmor;
+        UpdateStats();
+        return true;
     }
 
     public void HealthUpgrade()
@@ -99,5 +112,14 @@ public class PlayerHealthManager : MonoBehaviour
         maxArmor = maxArmor + ARMOR_INCREASE_PER_UPGRADE;
         currentArmor = maxArmor;
         UpdateStats();
+    }
+
+    public Vector2Int GetHealth()
+    {
+        return new Vector2Int(currentHealth, maxHealth);
+    }
+    public Vector2Int GetArmor()
+    {
+        return new Vector2Int(currentArmor, maxArmor);
     }
 }

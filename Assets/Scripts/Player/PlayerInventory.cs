@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] List<Weapon> availableWeapons;
+    [SerializeField] List<Weapon> weapons;
     [SerializeField] List<InventoryItem> inventoryItems;
-    void Start()
-    {
-        availableWeapons = new List<Weapon>();
-    }
-
-    void Update()
-    {
-
-    }
 
     public void PickupItem(InventoryItem item)
     {
         switch (item.itemType)
         {
-            case InventoryItem.ItemType.HEALTH: break;
-            case InventoryItem.ItemType.ARMOR: break;
-            case InventoryItem.ItemType.SHOTGUN_AMMO: break;
+            case InventoryItem.ItemType.HEALTH:
+                if (PlayerHealthManager.playerHealthManagerInstance.Heal(item.itemCount))
+                {
+                    item.gameObject.SetActive(false);
+                }
+                break;
+
+            case InventoryItem.ItemType.ARMOR:
+                if (PlayerHealthManager.playerHealthManagerInstance.ArmorUp(item.itemCount))
+                {
+                    item.gameObject.SetActive(false);
+                }
+                break;
+
+            case InventoryItem.ItemType.SHOTGUN_AMMO:
+                break;
             case InventoryItem.ItemType.AR_AMMO: break;
             case InventoryItem.ItemType.COIN: break;
+            case InventoryItem.ItemType.GRENADE: break;
             default: break;
         }
 

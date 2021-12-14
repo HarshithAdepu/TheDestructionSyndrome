@@ -16,6 +16,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     [SerializeField] Transform shootPoint;
     [SerializeField] Weapon currentWeapon;
     [SerializeField] List<Weapon> weapons;
+    [SerializeField] List<Weapon> availableWeapons;
     InputManager inputManager;
     AudioSource fireSFX, switchSFX;
 
@@ -24,7 +25,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         lastFired = Time.time;
 
         weaponIndex = 0;
-        currentWeapon = weapons[weaponIndex];
+        currentWeapon = availableWeapons[weaponIndex];
 
         GameManager.instance.currentWeapon = currentWeapon;
 
@@ -42,7 +43,7 @@ public class PlayerWeaponHandler : MonoBehaviour
         fireSFX.clip = currentWeapon.fireSFX;
         switchSFX.clip = currentWeapon.switchSFX;
 
-        foreach (Weapon w in weapons)
+        foreach (Weapon w in availableWeapons)
         {
             w.ammoLeft = w.ammo;
         }
@@ -101,8 +102,8 @@ public class PlayerWeaponHandler : MonoBehaviour
         if (value > 0)
             weaponIndex++;
         else if (value < 0)
-            weaponIndex += (weapons.Count - 1);
-        currentWeapon = weapons[weaponIndex % weapons.Count];
+            weaponIndex += (availableWeapons.Count - 1);
+        currentWeapon = availableWeapons[weaponIndex % availableWeapons.Count];
         GameManager.instance.currentWeapon = currentWeapon;
         Debug.Log("Current Weapon: " + currentWeapon);
 
@@ -141,5 +142,30 @@ public class PlayerWeaponHandler : MonoBehaviour
         GameObject bullet = ObjectPooler.objectPoolerInstance.SpawnObject("Bullet", shootPoint.position, shootPoint.rotation);
         AudioManager.audioManagerInstance.PlaySound("Gunshot");
 
+    }
+
+    public bool PickUpAmmo(string weapon, int ammoCount)
+    {
+        foreach (Weapon w in weapons)
+        {
+            if (w.name == weapon)
+            {
+                w.ammoLeft += ammoCount;
+                if (ammoLeft > ammo)
+                    ammoLeft = ammo;
+                return true;
+            }
+        }
+        Debug.Log("Weapon " + weapon + " not found!");
+        return false;
+    }
+
+    public void UnlockWeapon(string weapon)
+    {
+        foreach (Weapon w in weapons)
+        {
+            if (w.name == weapon)
+                availableWeapons.Add(w);
+        }
     }
 }
