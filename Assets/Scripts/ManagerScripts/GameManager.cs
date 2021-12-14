@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,5 +14,11 @@ public class GameManager : MonoBehaviour
         instance = this;
         inputManagerInstance = new InputManager();
         inputManagerInstance.Enable();
+        inputManagerInstance.Player.CloseGame.performed += CloseGame;
+    }
+    void CloseGame(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Closing Application");
+        Application.Quit();
     }
 }

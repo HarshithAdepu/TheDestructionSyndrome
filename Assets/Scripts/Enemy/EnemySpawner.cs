@@ -54,13 +54,22 @@ public class EnemySpawner : MonoBehaviour
     {
         locationFound = false;
         int chosenLocation = 0;
-
-        while (!locationFound)
+        int spawnTryCount = 0;
+        while (!locationFound && spawnTryCount < 30)
         {
+            spawnTryCount++;
             chosenLocation = (Random.Range(0, spawnPoints.Count));
 
             if (Vector3.Distance(spawnPoints[chosenLocation].position, GameObject.Find("Player").transform.position) > minDistanceFromPlayer && Vector3.Distance(spawnPoints[chosenLocation].position, GameObject.Find("Player").transform.position) < maxDistanceFromPlayer)
+            {
                 locationFound = true;
+                spawnTryCount = 0;
+            }
+        }
+        if (spawnTryCount >= 15)
+        {
+            Debug.Log("Spawning Enemy Failed");
+            return;
         }
 
         enemiesOnScene.Add(ObjectPooler.objectPoolerInstance.SpawnObject("Enemy", spawnPoints[chosenLocation].position, Quaternion.identity));

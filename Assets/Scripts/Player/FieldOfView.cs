@@ -4,44 +4,46 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
-    public float viewRadius = 5;
-    public float viewAngle = 135;
-    Collider2D[] playerInRadius;
-    public LayerMask obstacleMask, playerMask;
-    public List<Transform> visiblePlayer = new List<Transform>();
+    public static FieldOfView fieldOfViewInstance;
+    public float viewRadius, viewAngle;
+    [SerializeField] int aimAssistAngle, aimAssistRadius;
+    Collider2D[] entitiesInRadius;
+    public LayerMask obstacleMask, enemyMask;
+    public List<Transform> visibleEntities = new List<Transform>();
+    void Awake()
+    {
+        fieldOfViewInstance = this;
+    }
     private void FixedUpdate()
     {
-        FindVisiblePlayer();
+        //FindVisibleEntities();
     }
 
-    void FindVisiblePlayer()
+    void FindVisibleEntities()
     {
-        playerInRadius = Physics2D.OverlapCircleAll(transform.position, viewRadius);
-
-        visiblePlayer.Clear();
-
-        for (int i = 0; i < playerInRadius.Length; i++)
+        visibleEntities.Clear();
+        RaycastHit2D hitData;
+        int stepAngle = 1;
+        for (int i = 0; i < aimAssistAngle; i++)
         {
-            Transform player = playerInRadius[i].transform;
-            Vector2 dirPlayer = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
-            if (Vector2.Angle(dirPlayer, transform.right) < viewAngle / 2)
+            float angle = transform.eulerAngles.y - aimAssistAngle / 2 + stepAngle * i;
+            Vector3 dir = DirFromAngle(angle, false);
+            Debug.DrawRay(transform.position, dir, Color.red);
+            hitData = Physics2D.Raycast(transform.position, dir * aimAssistRadius, aimAssistAngle, enemyMask);
+            if (hitData.collider != null)
             {
-                float distancePlayer = Vector2.Distance(transform.position, player.position);
-
-                if (!Physics2D.Raycast(transform.position, dirPlayer, distancePlayer, obstacleMask))
-                {
-                    visiblePlayer.Add(player);
-                }
+                if (hitData.transform != visibleEntities[visibleEntities.Count - 2])
+                    visibleEntities.Add(hitData.transform);
             }
         }
+
     }
 
     public Vector2 DirFromAngle(float angleDeg, bool global)
     {
         if (!global)
-        {
             angleDeg += transform.eulerAngles.z;
-        }
+
         return new Vector2(Mathf.Cos(angleDeg * Mathf.Deg2Rad), Mathf.Sin(angleDeg * Mathf.Deg2Rad));
     }
 }

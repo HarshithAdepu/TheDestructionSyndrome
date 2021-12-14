@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e0bfe107093e941a6151a0cc5b096e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 5
+  enemySpeed: 6
   destinationReachedDistance: 0.5
   pathUpdateInterval: 0.5
 --- !u!114 &-7071751608371447574
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e7674efdcb1a84e989fd6748b3e2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCoolDown: 2
-  attackDamage: 50
+  attackCoolDown: 1
+  attackDamage: 30
 --- !u!1 &4148427399978837321
 GameObject:
   m_ObjectHideFlags: 0

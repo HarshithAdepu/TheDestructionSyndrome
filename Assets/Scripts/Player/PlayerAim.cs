@@ -16,6 +16,7 @@ public class PlayerAim : MonoBehaviour
     float lookAngle;
     Vector2 lastLookDirection = Vector2.zero;
     [SerializeField] float controllerDeadZone;
+    [SerializeField] Transform closestE;
 
     void Awake()
     {
@@ -39,23 +40,22 @@ public class PlayerAim : MonoBehaviour
     {
         if (playerInput.currentControlScheme == "Keyboard and Mouse")
         {
-            //mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
             lastLookDirection = (mousePosition - rb.position).normalized;
 
-            mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            lookAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.AngleAxis(lookAngle, Vector3.forward), 10000 * Time.deltaTime);
+            aimingVector = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         }
         else if (playerInput.currentControlScheme == "Gamepad")
         {
             aimingVector = inputManager.Player.Aiming.ReadValue<Vector2>();
-            //aimingVector = AssistedAim();
+            //aimingVector = AssistedAim(aimingVector) - (Vector2)transform.position;
             if (aimingVector.magnitude > controllerDeadZone)
                 lastLookDirection = aimingVector;
+            else
+                aimingVector = lastLookDirection;
+            Debug.Log("Closest Guy: " + aimingVector);
         }
 
-        lookDirection = lastLookDirection;
-        //lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        lookAngle = Mathf.Atan2(aimingVector.y, aimingVector.x) * Mathf.Rad2Deg;
     }
 
     private void FixedUpdate()
@@ -63,8 +63,22 @@ public class PlayerAim : MonoBehaviour
         rb.rotation = lookAngle;
     }
 
-    Vector2 AssistedAim()
+    Vector2 AssistedAim(Vector2 aimingVector)
     {
-        return Vector2.zero;
+        List<Transform> visibleEntities = FieldOfView.fieldOfViewInstance.visibleEntities;
+        if (visibleEntities.Count == 0)
+            return aimingVector;
+
+        int closestEnemyIndex = 0;
+        float distance = int.MaxValue;
+        for (int i = 0; i < visibleEntities.Count; i++)
+        {
+            if (Vector2.Distance(visibleEntities[i].position, transform.position) < distance)
+            {
+                distance = Vector2.Distance(visibleEntities[i].position, transform.position);
+                closestEnemyIndex = i;
+            }
+        }
+        return visibleEntities[closestEnemyIndex].position.normalized;
     }
 }

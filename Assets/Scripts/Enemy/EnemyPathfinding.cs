@@ -59,7 +59,12 @@ public class EnemyPathfinding : MonoBehaviour
         try
         {
             directionMoving = ((Vector2)path.vectorPath[currentWayPoint] - enemyRB.position).normalized;
-            lookDirection = (Vector2)path.vectorPath[currentWayPoint] - enemyRB.position;
+
+            if (Vector2.Distance((Vector2)path.vectorPath[currentWayPoint], enemyRB.position) > 0.2)
+                lookDirection = (Vector2)path.vectorPath[currentWayPoint] - enemyRB.position;
+            else
+                lookDirection = (Vector2)path.vectorPath[currentWayPoint + 1] - enemyRB.position;
+
             transform.GetChild(0).rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg));
             enemyRB.MovePosition(enemyRB.position + (directionMoving * enemySpeed * Time.fixedDeltaTime));
             distanceToDestination = Vector2.Distance(enemyRB.position, path.vectorPath[currentWayPoint]);

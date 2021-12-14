@@ -49,6 +49,14 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CloseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""c05405fa-2a91-4635-868f-ed7824a216ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -216,6 +224,61 @@ public class @InputManager : IInputActionCollection, IDisposable
                     ""action"": ""WeaponSwitching"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""7342764e-0b3f-4f3e-ad2b-af016937cf87"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeaponSwitching"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""47cd2fbb-3967-4535-a3c1-7b2783e3b409"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeaponSwitching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5a54ce5d-634a-4d0b-ae0a-4ed0a1861867"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeaponSwitching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b523375-2d9a-49a3-b6d1-306336b21769"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""CloseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5024a652-9415-4da8-b844-9b10814825d0"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CloseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -256,6 +319,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Aiming = m_Player.FindAction("Aiming", throwIfNotFound: true);
         m_Player_WeaponSwitching = m_Player.FindAction("WeaponSwitching", throwIfNotFound: true);
+        m_Player_CloseGame = m_Player.FindAction("CloseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -309,6 +373,7 @@ public class @InputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Aiming;
     private readonly InputAction m_Player_WeaponSwitching;
+    private readonly InputAction m_Player_CloseGame;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -317,6 +382,7 @@ public class @InputManager : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Aiming => m_Wrapper.m_Player_Aiming;
         public InputAction @WeaponSwitching => m_Wrapper.m_Player_WeaponSwitching;
+        public InputAction @CloseGame => m_Wrapper.m_Player_CloseGame;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -338,6 +404,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @WeaponSwitching.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwitching;
                 @WeaponSwitching.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwitching;
                 @WeaponSwitching.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWeaponSwitching;
+                @CloseGame.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseGame;
+                @CloseGame.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseGame;
+                @CloseGame.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseGame;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -354,6 +423,9 @@ public class @InputManager : IInputActionCollection, IDisposable
                 @WeaponSwitching.started += instance.OnWeaponSwitching;
                 @WeaponSwitching.performed += instance.OnWeaponSwitching;
                 @WeaponSwitching.canceled += instance.OnWeaponSwitching;
+                @CloseGame.started += instance.OnCloseGame;
+                @CloseGame.performed += instance.OnCloseGame;
+                @CloseGame.canceled += instance.OnCloseGame;
             }
         }
     }
@@ -382,5 +454,6 @@ public class @InputManager : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnAiming(InputAction.CallbackContext context);
         void OnWeaponSwitching(InputAction.CallbackContext context);
+        void OnCloseGame(InputAction.CallbackContext context);
     }
 }
