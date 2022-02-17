@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Harsh
   productName: TDS
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 88c519adf0d2e2f48bc48e8f3987597e, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.9215687, g: 0, b: 0, a: 1}
   m_ShowUnitySplashScreen: 1

@@ -64,28 +64,30 @@ public class PlayerWeaponHandler : MonoBehaviour
     {
         shooting = inputManager.Player.Shoot.ReadValue<float>() > 0;
         buttonHeldDown = inputManager.Player.Shoot.ReadValue<float>() > 0;
-
-        if (shooting && readyToShoot)
+        if (!PauseMenu.GameIsPaused)
         {
-            if (currentWeapon.bulletsPerShot > 1)
+            if (shooting && readyToShoot)
             {
-                for (int i = 0; i < currentWeapon.bulletsPerShot; i++)
+                if (currentWeapon.bulletsPerShot > 1)
                 {
-                    Invoke("Shoot", currentWeapon.timeBetweenShots * i);
+                    for (int i = 0; i < currentWeapon.bulletsPerShot; i++)
+                    {
+                        Invoke("Shoot", currentWeapon.timeBetweenShots * i);
+                    }
+                    if (currentWeapon.ammoLeft > 0)
+                        currentWeapon.ammoLeft--;
                 }
-                if (currentWeapon.ammoLeft > 0)
-                    currentWeapon.ammoLeft--;
-            }
-            else
-            {
-                Shoot();
-                if (currentWeapon.ammoLeft > 0)
-                    currentWeapon.ammoLeft--;
-            }
+                else
+                {
+                    Shoot();
+                    if (currentWeapon.ammoLeft > 0)
+                        currentWeapon.ammoLeft--;
+                }
 
-            if (currentWeapon.ammoLeft >= 0)
-                ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;
-            else ammoCount.text = "Ammo: ∞";
+                if (currentWeapon.ammoLeft >= 0)
+                    ammoCount.text = "Ammo: " + currentWeapon.ammoLeft + "/" + currentWeapon.ammo;
+                else ammoCount.text = "Ammo: ∞";
+            }
         }
 
         if (!currentWeapon.allowFireHold && buttonHeldDown)
