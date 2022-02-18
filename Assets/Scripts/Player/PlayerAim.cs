@@ -18,6 +18,11 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] float controllerDeadZone;
     [SerializeField] Transform closestE;
 
+    private void Start()
+    {
+       
+    }
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
