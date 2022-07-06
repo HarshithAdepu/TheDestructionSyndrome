@@ -46,7 +46,6 @@ public class PlayerAim : MonoBehaviour
         if (playerInput.currentControlScheme == "Keyboard and Mouse")
         {
             lastLookDirection = (mousePosition - rb.position).normalized;
-
             aimingVector = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         }
         else if (playerInput.currentControlScheme == "Gamepad")
